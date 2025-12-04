@@ -1,0 +1,19 @@
+<table class="timesheet">
+  @for(group of groupedEntries; track group) {
+
+  <tr class="day-header">
+    <td colspan="4">
+      <strong>{{ group.dayLabel }}</strong> &mdash; Total:
+      {{ group.totalHours | number : '1.2-2' }} hrs
+    </td>
+  </tr>
+  @for(entry of group.entries; track entry) {
+  <tr
+    app-entry-item
+    [entry]="entry"
+    [now]="now"
+    (editEntry)="onEditEntry($event)"
+    (deleteEntry)="onDeleteEntry($event)"
+  ></tr>
+  } }
+</table>

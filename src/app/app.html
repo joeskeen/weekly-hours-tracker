@@ -1,0 +1,97 @@
+<h1>{{ title() }}</h1>
+
+@if (loading()) {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+} @else {
+  <div class="top-actions">
+    <button (click)="toggleSetup()" aria-label="Configure settings">
+      ⚙️ Settings
+    </button>
+    <div class="export-menu">
+      <button
+        #exportBtn
+        (click)="onExportButtonClick()"
+        (keydown)="onExportButtonKeydown($event)"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="exportMenuOpen()"
+        aria-controls="export-dropdown"
+        aria-label="Export week data"
+      >
+        📤 Export
+      </button>
+      @if (exportMenuOpen()) {
+        <div
+          #exportDropdown
+          id="export-dropdown"
+          class="export-dropdown"
+          role="menu"
+          aria-label="Export format options"
+          (keydown)="onExportMenuKeydown($event)"
+        >
+          <button class="export-item" role="menuitem" (click)="exportWeekCSV()">
+            Export as CSV
+          </button>
+          <button
+            class="export-item"
+            role="menuitem"
+            (click)="exportWeekJSON()"
+          >
+            Export as JSON
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (setup(); as setup) {
+    @if (!showSetup()) {
+      <app-setup [setup]="setup" (saveSetup)="onSaveSetup($event)"></app-setup>
+    } @else {
+      <!-- Week navigation -->
+      <div class="week-nav">
+        <button (click)="previousWeek()">⬅️</button>
+        <span> Week of {{ weekLabel() }} </span>
+        <button (click)="nextWeek()" [disabled]="!canGoToNextWeek()">➡️</button>
+      </div>
+      <app-time-input
+        [now]="now()"
+        (clockIn)="onClockIn($event)"
+        (clockOut)="onClockOut($event)"
+      ></app-time-input>
+      <!-- TODO: add recommended clock-out display here -->
+      @if (recommendedClockOut(); as recommendedClockOut) {
+        <div>
+          <span
+            >Recommended clock-out:
+            <strong>{{ recommendedClockOut }}</strong></span
+          >
+        </div>
+      }
+      <app-weekly-progress
+        [completedHours]="completedHours()"
+        [remainingHours]="remainingHours()!"
+        [targetHours]="setup.targetHours"
+      ></app-weekly-progress>
+      <app-time-entries-list
+        [groupedEntries]="groupedEntries()"
+        [now]="now()"
+        (editEntry)="onEditEntry($event)"
+        (deleteEntry)="onDeleteEntry($event)"
+      ></app-time-entries-list>
+    }
+    @if (editingEntry(); as editingEntry) {
+      <app-edit-entry
+        [entry]="editingEntry"
+        (save)="onSaveEditEntry($event)"
+        (cancel)="onCancelEditEntry()"
+      >
+      </app-edit-entry>
+    }
+  }
+}
+
+<!-- PWA Install Prompt -->
+<app-install-prompt></app-install-prompt>

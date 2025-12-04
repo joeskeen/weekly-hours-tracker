@@ -1,0 +1,14 @@
+<div class="progress-container">
+  <h2>Progress</h2>
+  <div class="progress-bar-bg">
+    <div
+      class="progress-bar-fill"
+      [style.width]="progressPercent() + '%'"
+      aria-valuenow="progressPercent()"
+    ></div>
+  </div>
+  <div class="progress-summary">
+    <span>Completed: {{ completedHours() | number : '1.2-2' }} / {{ targetHours() }} hrs</span>
+    <span>Remaining: {{ remainingHours() | number : '1.2-2' }} hrs</span>
+  </div>
+</div>

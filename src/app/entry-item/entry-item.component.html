@@ -1,0 +1,15 @@
+<td>{{ entry.in | date: 'shortTime' }}</td>
+<td [class.clockedIn]="!entry.out">
+  {{ entry.out ? (entry.out | date: 'shortTime') : 'Clocked In' }}
+</td>
+<td>
+  {{
+    entry.out
+      ? ((entry.out - entry.in) / 3600000 | number: '1.2-2')
+      : ((now - entry.in) / 3600000 | number: '1.2-2')
+  }}
+</td>
+<td class="actions">
+  <button (click)="editEntryClicked()">✏️</button>
+  <button (click)="deleteEntryClicked()">🗑️</button>
+</td>

@@ -1,0 +1,49 @@
+<form (submit)="$event.preventDefault(); saveSetup.emit(setup())">
+  <div class="sections">
+    <section class="schedule-settings">
+      <h3>Schedule Settings</h3>
+      <div>
+        <label>Weekly Required Hours: </label>
+        <input type="number" [field]="setupForm.targetHours" />
+      </div>
+      <div>
+        <label>Week Starts On: </label>
+        <select [field]="setupForm.weekStartsOn">
+          @for (day of daysOfWeek(); track day) {
+            <option [value]="day">{{ day }}</option>
+          }
+        </select>
+      </div>
+      @for (day of daysOfWeek(); track day) {
+        <div>
+          <label> {{ day }} Planned Hours: </label>
+          <input type="number" [field]="setupForm.planned[day]" />
+        </div>
+      }
+    </section>
+    <section class="theme-section">
+      <h3>Theme Settings</h3>
+      <div>
+        <label>Theme Mode: </label>
+        <select [field]="setupForm.theme.mode">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <div>
+        <label>Primary Color: </label>
+        <input type="color" [field]="setupForm.theme.primaryColor" />
+      </div>
+    </section>
+  </div>
+  <footer>
+    @if (setupForm().invalid()) {
+      @for (error of setupForm().errors(); track error) {
+        <div class="error">{{ error.message ?? error.kind }}</div>
+      }
+    }
+    <button type="submit" [disabled]="setupForm().invalid()">
+      <span>💾 Save Plan</span>
+    </button>
+  </footer>
+</form>

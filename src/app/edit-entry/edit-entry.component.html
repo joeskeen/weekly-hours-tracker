@@ -1,0 +1,12 @@
+<div class="edit-entry-form">
+  <label
+    >Clock In:
+    <input type="datetime-local" [(ngModel)]="clockIn" name="clockIn" />
+  </label>
+  <label
+    >Clock Out:
+    <input type="datetime-local" [(ngModel)]="clockOut" name="clockOut" />
+  </label>
+  <button (click)="saveEditEntry()">Save</button>
+  <button (click)="cancelEditEntry()">Cancel</button>
+</div>

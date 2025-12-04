@@ -1,0 +1,12 @@
+<div class="time-row">
+  <input type="datetime-local" [field]="timeForm" class="time-input" />
+  <button type="button" (click)="punch(clockIn)" [disabled]="timeForm().invalid()">🕘 In</button>
+  <button type="button" (click)="punch(clockOut)" [disabled]="timeForm().invalid()">🕔 Out</button>
+</div>
+@if (nonRequiredErrors().length) {
+  <div class="time-errors">
+    @for (error of nonRequiredErrors(); track error) {
+      <div class="error">{{ error.message ?? error.kind }}</div>
+    }
+  </div>
+}

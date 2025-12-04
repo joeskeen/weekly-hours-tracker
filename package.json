@@ -1,0 +1,49 @@
+{
+  "name": "time-widget",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "serve:built": "npm run build && npx http-server .\\dist\\time-widget\\browser\\",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:ci": "vitest run --coverage",
+    "lint": "ng lint"
+  },
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "dependencies": {
+    "@angular/common": "^21.0.2",
+    "@angular/compiler": "^21.0.2",
+    "@angular/core": "^21.0.2",
+    "@angular/forms": "^21.0.2",
+    "@angular/platform-browser": "^21.0.2",
+    "@angular/pwa": "^21.0.2",
+    "@angular/service-worker": "^21.0.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.1.2",
+    "@angular-eslint/builder": "21.0.1",
+    "@angular-eslint/eslint-plugin": "21.0.1",
+    "@angular-eslint/eslint-plugin-template": "21.0.1",
+    "@angular-eslint/schematics": "21.0.1",
+    "@angular-eslint/template-parser": "21.0.1",
+    "@angular/build": "^21.0.1",
+    "@angular/cli": "^21.0.1",
+    "@angular/compiler-cli": "^21.0.2",
+    "@angular/platform-browser-dynamic": "^21.0.2",
+    "@typescript-eslint/eslint-plugin": "7.11.0",
+    "@typescript-eslint/parser": "7.11.0",
+    "@vitest/coverage-v8": "^4.0.15",
+    "angular-eslint": "^21.0.1",
+    "eslint": "8.57.1",
+    "fake-indexeddb": "^6.2.5",
+    "jsdom": "^27.1.0",
+    "prettier": "^3.7.3",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  }
+}
